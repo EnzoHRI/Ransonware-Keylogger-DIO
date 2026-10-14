@@ -18,9 +18,9 @@ educacional.
 3-Reconhecer arquivos potencialmente perigosos;
 4-Aprender a desenvolver a partir de uma base sólida;
 
-## 📂 **ESTRUTURA - LOCALIZAÇÃO DOS ARQUIVOS E SUAS DESCRIÇÕES.**
+## 📂 **ESTRUTURA - LOCALIZAÇÃO DOS ARQUIVOS E SUAS DESCRIÇÕES**
 Em conjunto ao README.md principal do repositório, será possível encontrar os arquivos desenvolvidos (Ransomware
-e Keylogger), ambos separados, juntos ao seu "ecosistema" de teste. Tabela informativa:
+e Keylogger), ambos separados, juntos ao seu "ecosistema" de teste e descrições. Tabela informativa:
 
 Pasta | Descrição |
 |-------|-----------|
