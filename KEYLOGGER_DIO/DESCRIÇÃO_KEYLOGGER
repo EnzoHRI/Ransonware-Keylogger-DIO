@@ -1,0 +1,81 @@
+# 🔑 Keylogger - Descrição
+
+## O que é?
+O keylogger é um tipo de malware que captura todas as teclas utilizadas pelo alvo;
+registrando senhas, chaves de acesso, e tudo o que o usuário digitar. Este projeto
+é uma simulação didática em ambiente controlado: Todos os testes serão realizados 
+de forma local, sem envolver terceiros;
+
+## KEYLOGGER - Código de registro
+
+### Bibliotecas utilizadas
+1. pynput
+Biblioteca utilizada para monitorar dispositivos de entrada, como Mouse e Teclado.
+
+### Como o código funciona
+O programa é organizado em três simples partes:
+
+1. Teclas ignoradas - um conjunto (`IGNORAR`) define as teclas que não serão 
+registradas pois não possuem valor real, tais como `Shift` e `Cmd`;
+
+2. Função de captura - (`on_press`) executa sempre que uma tecla é pressionada,
+ela distingue teclas comuns (como letras, números etc) de teclas especiais,
+(como espaço, Tab, Esc, etc). Teclas especiais são registradas como um 
+equivalente: `Enter` vira quebra de linha, `Espaço` vira `" "` e teclas
+desconhecidas são registradas pelo nome `[Nome da tecla]`;
+
+3. Listener - O `keyboard.Listener` fica "escutando" o teclado em segundo plano
+e chama `on_press` a cada tecla, até o programa ser encerrado;
+
+### Execução (Terminal)
+python .\keylogger.pyw
+
+## KEYLOGGER EMAIL - Código de exportação
+
+### O que é?
+O script funciona de forma complementar ao keylogger, exportando os dados obtidos 
+para um endereço email.
+
+### Bibliotecas utilizadas
+1. pynput
+Biblioteca utilizada para monitorar dispositivos de entrada, como Mouse e Teclado.
+
+2. smtplib
+Módulo nativo do Python para envio de e-mails via protocolo SMTP.
+
+3. email.mime.text
+Módulo nativo do Python, formata o texto capturado como uma mensagem de e-mail
+válida.
+
+4. threading.Timer
+Agenda tarefas em segundo plano.
+
+### Como o código funciona
+O programa captura os dados e realiza a exfiltração em um único fluxo:
+
+1. Configuração do e-mail - No início do código, três variáveis definem o remetente
+(`EMAIL_ORIGEM), o destinatário (`EMAIL_DESTINO`) e a senha (`SENHA_EMAIL`). Como
+os testes são locais, origem e destino são o mesmo. !!!NOTA!!! A variável `SENHA-EMAIl`
+exige a senha da conta google para apps, e não a senha padrão de login;
+
+2. Captura - O `keyboard.Listener` escuta o teclado e, a cada tecla pressionada,
+chama a função `on_press`, que adiciona o caractere a uma variável `log`;
+
+3. Envio - A função `enviar_email()` é chamada a cada 60 segundos pelo `Timer`. Se 
+houver conteúdo no `log`, ela monta um e-mail com aquele texto (`MIMEText`) e envia
+pelo servidor do Gmail via `smtplib`, com conexão segura (`starttls`). se o envio
+falhar, o programa exibe o erro e continua rodando;
+
+4. Recomeço do ciclo - Após o envio, o `log` é zerado e um novo `Timer` é agendado,
+repetindo o processo até o programa ser encerrado;
+
+### Execução - (Terminal)
+python .\keylogger_email.pyw
+
+## NOTA
+As credemciais de e-mail não ficam gravadas no código para que eu não seja exposto.
+Altere os endereços conforme explícito pelo código.
+
+
+
+
